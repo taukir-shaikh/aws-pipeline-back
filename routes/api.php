@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::post('/login', [AuthenticationController::class, 'login']);
+Route::post('/register-user', [AuthenticationController::class, 'registerUser']);
+
 
 Route::middleware(['auth:sanctum',EchoTextMiddleWare::class])->group(function () {
 

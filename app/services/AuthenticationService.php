@@ -22,4 +22,21 @@ class AuthenticationService
             return response()->json(['error' => 'Invalid credentials'],401);
         }
     }
+
+    public function registerUser($data) {
+        $existingUser = DB::table('users')->where('email', $data['email'])->first();
+        if ($existingUser) {
+            return response()->json(['error' => 'User already exists'], 409);
+        }
+
+        DB::table('users')->insert([
+            'name' => $data['name'] ?? '',
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        return response()->json(['message' => 'User registered successfully', 'user' => $data['email'],], 201);
+    }
 }

@@ -22,4 +22,21 @@ class AuthenticationController extends Controller
             return response()->json(['error' => 'An error occurred during authentication', 'message' => $e->getMessage()], 500);
         }
     }
+
+    public function registerUser(Request $request)
+    {
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email',
+                'password' => 'required'
+            ]);
+
+            $authService = new AuthenticationService();
+            $result = $authService->registerUser($request->all());
+            return $result;
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred during user registration', 'message' => $e->getMessage()], 500);
+        }
+    }
 }
