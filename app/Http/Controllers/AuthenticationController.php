@@ -16,7 +16,7 @@ class AuthenticationController extends Controller
             ]);
 
             $authService = new AuthenticationService();
-            $result = $authService->authenticate($request->email, $request->password);
+            $result = $authService->authenticate($request->username, $request->password);
             return $result;
         } catch (\Exception $e) {
             return response()->json(['error' => 'An error occurred during authentication', 'message' => $e->getMessage()], 500);

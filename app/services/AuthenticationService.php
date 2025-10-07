@@ -2,13 +2,14 @@
 
 namespace App\Services;
 
+use App\Models\Users;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AuthenticationService
 {
-    public function authenticate($email, $password) {
-        $user = DB::table('users')->where('email', $email)->first();
+    public function authenticate($username, $password) {
+        $user = Users::where('email', $username)->first();
         if ($user && Hash::check($password, $user->password)) {
             
             return response()->json([
