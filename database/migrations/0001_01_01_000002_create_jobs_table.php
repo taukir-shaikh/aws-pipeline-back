@@ -13,13 +13,13 @@ return new class extends Migration
     {
         if (!Schema::hasTable('jobs')) {
             Schema::create('jobs', function (Blueprint $table) {
-                $table->id()->primary();
+                $table->uuid('id')->primary();
                 $table->string('queue', 191)->index();
-                $table->longText('payload', 65535);
+                $table->longText('payload');
                 $table->unsignedTinyInteger('attempts');
                 $table->unsignedInteger('reserved_at')->nullable();
-                $table->unsignedInteger('available_at', 191);
-                $table->unsignedInteger('created_at', 191);
+                $table->unsignedInteger('available_at');
+                $table->unsignedInteger('created_at');
             });
         }
 
@@ -45,8 +45,8 @@ return new class extends Migration
                 $table->string('uuid')->unique();
                 $table->text('connection', 191)->nullable();
                 $table->text('queue', 191)->nullable();
-                $table->longText('payload', 65535);
-                $table->longText('exception', 65535);
+                $table->longText('payload');
+                $table->longText('exception');
                 $table->timestamp('failed_at')->useCurrent();
             });
         }
