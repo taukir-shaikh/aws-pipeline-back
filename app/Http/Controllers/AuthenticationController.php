@@ -39,4 +39,11 @@ class AuthenticationController extends Controller
             return response()->json(['error' => 'An error occurred during user registration', 'message' => $e->getMessage()], 500);
         }
     }
+
+    public function logout()
+    {
+        $user = User::find(Auth::user()->id);
+        $user->tokens()->delete();
+        return response()->json(["status" => true, "message" => "Successfully logged out"]);
+    }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\PipelineController;
 use App\Http\Middleware\EchoTextMiddleWare;
 use Illuminate\Support\Facades\Route;
 
@@ -14,5 +15,7 @@ Route::middleware(['auth:sanctum',EchoTextMiddleWare::class])->group(function ()
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->withoutMiddleware(EchoTextMiddleWare::class);
     Route::get('logout', [AuthenticationController::class, 'logout']);
+
+    Route::get('get-pipelines-availability', [PipelineController::class, 'getPipelineAvailability']);
 });
 
