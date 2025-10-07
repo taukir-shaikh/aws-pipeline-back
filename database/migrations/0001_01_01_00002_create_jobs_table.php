@@ -13,7 +13,7 @@ return new class extends Migration
     {
         if (!Schema::hasTable('jobs')) {
             Schema::create('jobs', function (Blueprint $table) {
-                $table->uuid('id')->primary();
+                $table->increments('id');
                 $table->string('queue', 191)->index();
                 $table->longText('payload');
                 $table->unsignedTinyInteger('attempts');
@@ -26,7 +26,7 @@ return new class extends Migration
         if (!Schema::hasTable('job_batches')) {
 
             Schema::create('job_batches', function (Blueprint $table) {
-                $table->string('id', 191)->primary();
+                $table->increments('id');
                 $table->string('name', 191)->nullable();
                 $table->integer('total_jobs');
                 $table->integer('pending_jobs');
@@ -41,7 +41,7 @@ return new class extends Migration
 
         if (!Schema::hasTable('failed_jobs')) {
             Schema::create('failed_jobs', function (Blueprint $table) {
-                $table->uuid('id')->primary();
+                $table->increments('id');
                 $table->string('uuid')->unique();
                 $table->text('connection', 191)->nullable();
                 $table->text('queue', 191)->nullable();

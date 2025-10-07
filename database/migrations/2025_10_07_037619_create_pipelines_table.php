@@ -13,7 +13,7 @@ return new class extends Migration
     {
         if (!Schema::hasTable('pipelines')) {
             Schema::create('pipelines', function (Blueprint $table) {
-                $table->uuid('id')->primary();
+                $table->increments('id');
                 $table->string('name');
                 $table->timestamps();
             });

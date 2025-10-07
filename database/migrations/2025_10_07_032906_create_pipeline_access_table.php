@@ -13,7 +13,7 @@ return new class extends Migration
     {
         if (!Schema::hasTable('pipeline_access')) {
             Schema::create('pipeline_access', function (Blueprint $table) {
-                $table->uuid('id')->primary();
+                $table->increments('id');
                 $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
                 $table->foreignId('pipeline_id')->constrained('pipelines')->onDelete('cascade');
                 $table->string('branch_name');
